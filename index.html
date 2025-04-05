@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlameOfAvaya - YouTube Channel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Default Dark Theme */
+        :root {
+            --background-color: #121212;
+            --text-color: #EDEDED;
+            --highlight-color: #FF5722;
+            --card-background: #2C2C2C;
+            --input-background: #333;
+            --button-background: #FF5722;
+            --button-hover: #FF8A65;
+            --input-border: #444;
+        }
+
+        /* Light Theme */
+        .light-theme {
+            --background-color: #FFFFFF;
+            --text-color: #333;
+            --highlight-color: #00B0FF;
+            --card-background: #F9F9F9;
+            --input-background: #F1F1F1;
+            --button-background: #00B0FF;
+            --button-hover: #0288D1;
+            --input-border: #CCC;
+        }
+
+        /* Neon Theme */
+        .neon-theme {
+            --background-color: #000;
+            --text-color: #39FF14;
+            --highlight-color: #39FF14;
+            --card-background: #333;
+            --input-background: #222;
+            --button-background: #39FF14;
+            --button-hover: #00FF00;
+            --input-border: #666;
+        }
+
+        /* Blue Theme */
+        .blue-theme {
+            --background-color: #001f3d;
+            --text-color: #A7C7E7;
+            --highlight-color: #2196F3;
+            --card-background: #1E3A5F;
+            --input-background: #1A2B44;
+            --button-background: #2196F3;
+            --button-hover: #1976D2;
+            --input-border: #324B74;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            transition: all 0.3s ease;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 40px;
+            font-weight: 600;
+            color: var(--highlight-color);
+        }
+
+        #subscriberCount {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 18px;
+            color: var(--highlight-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .section {
+            margin-top: 50px;
+        }
+
+        .search-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        input[type="text"] {
+            padding: 15px;
+            width: 80%;
+            max-width: 400px;
+            border-radius: 30px;
+            border: 1px solid var(--input-border);
+            background-color: var(--input-background);
+            color: var(--text-color);
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        input[type="button"] {
+            padding: 15px 30px;
+            border-radius: 30px;
+            border: none;
+            background-color: var(--button-background);
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        input[type="button"]:hover {
+            background-color: var(--button-hover);
+        }
+
+        .video, .playlist {
+            margin: 15px;
+            display: inline-block;
+            width: 300px;
+            text-align: center;
+            background-color: var(--card-background);
+            border-radius: 15px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .video:hover, .playlist:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        img:hover {
+            transform: scale(1.05);
+        }
+
+        a {
+            color: var(--highlight-color);
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup iframe {
+            width: 80%;
+            height: 80%;
+            border: none;
+        }
+
+        .popup-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .popup-overlay:before {
+            content: '';
+            background-color: rgba(0, 0, 0, 0.6);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .popup-content {
+            z-index: 2;
+        }
+
+        .theme-switcher {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .theme-switcher button {
+            padding: 12px 24px;
+            margin: 5px;
+            background-color: var(--highlight-color);
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .theme-switcher button:hover {
+            background-color: var(--button-hover);
+        }
+
+        .video-stats {
+            font-size: 14px;
+            color: #B0B0B0;
+            margin-top: 10px;
+        }
+
+        .video-stats span {
+            display: block;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body class="dark-theme">
+    <h1>FlameOfAvaya - YouTube Channel</h1>
+    <div class="container">
+        <!-- Home Page Section -->
+        <div id="subscriberCount">Loading subscriber count...</div>
+
+        <!-- Search Section -->
+        <div class="search-section">
+            <input type="text" id="searchInput" placeholder="Search videos..." />
+            <input type="button" value="Search" onclick="searchVideos()" />
+        </div>
+
+        <!-- Latest Videos Section -->
+        <div class="section" id="latestVideosSection">
+            <h2>Latest Videos</h2>
+            <div id="latestVideos">Loading latest videos...</div>
+        </div>
+
+        <!-- Most Popular Videos Section -->
+        <div class="section" id="popularVideosSection">
+            <h2>Most Popular Videos</h2>
+            <div id="popularVideos">Loading popular videos...</div>
+        </div>
+
+        <!-- Playlists Section -->
+        <div class="section" id="playlistSection">
+            <h2>Playlists</h2>
+            <div id="playlists">Loading playlists...</div>
+        </div>
+
+        <!-- Theme Switcher -->
+        <div class="theme-switcher">
+            <button onclick="switchTheme('dark-theme')">Dark Theme</button>
+            <button onclick="switchTheme('light-theme')">Light Theme</button>
+            <button onclick="switchTheme('neon-theme')">Neon Theme</button>
+            <button onclick="switchTheme('blue-theme')">Blue Theme</button>
+        </div>
+    </div>
+
+    <!-- Video Popup -->
+    <div id="videoPopup" class="popup">
+        <div class="popup-overlay" onclick="closePopup()"></div>
+        <div class="popup-content">
+            <iframe id="popupVideo" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <script>
+        const apiKey = 'AIzaSyBXPwWr9QjRk-AAwgYun2XChItrNKzjeEk';
+        const channelId = 'UCmWqggEeCFHGdakwdcOSsyA'; 
+
+        const apiUrlVideos = `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&channelId=${channelId}&part=snippet&type=video&maxResults=5`;
+        const apiUrlPlaylists = `https://www.googleapis.com/youtube/v3/playlists?key=${apiKey}&channelId=${channelId}&part=snippet&maxResults=5`;
+        const apiUrlSubscribers = `https://www.googleapis.com/youtube/v3/channels?key=${apiKey}&id=${channelId}&part=statistics`;
+
+        // Fetch the latest videos
+        async function fetchLatestVideos() {
+            try {
+                const response = await fetch(apiUrlVideos);
+                const data = await response.json();
+                const videos = data.items;
+                let videoHtml = '';
+
+                for (const video of videos) {
+                    const videoId = video.id.videoId;
+                    const videoTitle = video.snippet.title;
+                    const videoThumbnail = video.snippet.thumbnails.high.url;
+                    const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
+
+                    const statsResponse = await fetch(`https://www.googleapis.com/youtube/v3/videos?key=${apiKey}&id=${videoId}&part=statistics`);
+                    const statsData = await statsResponse.json();
+                    const views = statsData.items[0].statistics.viewCount;
+
+                    videoHtml += `
+                        <div class="video">
+                            <img src="${videoThumbnail}" alt="${videoTitle}" onclick="openPopup('${videoId}')">
+                            <h3><a href="${videoUrl}" target="_blank">${videoTitle}</a></h3>
+                            <div class="video-stats">
+                                <span>Views: ${views}</span>
+                            </div>
+                        </div>
+                    `;
+                }
+
+                document.getElementById('latestVideos').innerHTML = videoHtml;
+            } catch (error) {
+                console.error('Error fetching latest videos:', error);
+            }
+        }
+
+        // Fetch the most popular videos
+        async function fetchPopularVideos() {
+            try {
+                const response = await fetch(`${apiUrlVideos}&order=viewCount`);
+                const data = await response.json();
+                const videos = data.items;
+                let videoHtml = '';
+
+                for (const video of videos) {
+                    const videoId = video.id.videoId;
+                    const videoTitle = video.snippet.title;
+                    const videoThumbnail = video.snippet.thumbnails.high.url;
+                    const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
+
+                    const statsResponse = await fetch(`https://www.googleapis.com/youtube/v3/videos?key=${apiKey}&id=${videoId}&part=statistics`);
+                    const statsData = await statsResponse.json();
+                    const views = statsData.items[0].statistics.viewCount;
+
+                    videoHtml += `
+                        <div class="video">
+                            <img src="${videoThumbnail}" alt="${videoTitle}" onclick="openPopup('${videoId}')">
+                            <h3><a href="${videoUrl}" target="_blank">${videoTitle}</a></h3>
+                            <div class="video-stats">
+                                <span>Views: ${views}</span>
+                            </div>
+                        </div>
+                    `;
+                }
+
+                document.getElementById('popularVideos').innerHTML = videoHtml;
+            } catch (error) {
+                console.error('Error fetching popular videos:', error);
+            }
+        }
+
+        async function fetchPlaylists() {
+            try {
+                const response = await fetch(apiUrlPlaylists);
+                const data = await response.json();
+                const playlists = data.items;
+                let playlistHtml = '';
+
+                for (const playlist of playlists) {
+                    const playlistTitle = playlist.snippet.title;
+                    const playlistId = playlist.id;
+                    const playlistUrl = `https://www.youtube.com/playlist?list=${playlistId}`;
+                    const playlistThumbnail = playlist.snippet.thumbnails.high.url;
+
+                    playlistHtml += `
+                        <div class="playlist">
+                            <img src="${playlistThumbnail}" alt="${playlistTitle}">
+                            <h3><a href="${playlistUrl}" target="_blank">${playlistTitle}</a></h3>
+                        </div>
+                    `;
+                }
+
+                document.getElementById('playlists').innerHTML = playlistHtml;
+            } catch (error) {
+                console.error('Error fetching playlists:', error);
+            }
+        }
+
+        async function fetchSubscriberCount() {
+            try {
+                const response = await fetch(apiUrlSubscribers);
+                const data = await response.json();
+                const subscriberCount = data.items[0].statistics.subscriberCount;
+                document.getElementById('subscriberCount').textContent = `Subscribers: ${subscriberCount}`;
+            } catch (error) {
+                console.error('Error fetching subscriber count:', error);
+            }
+        }
+
+        function openPopup(videoId) {
+            document.getElementById('videoPopup').style.display = 'flex';
+            document.getElementById('popupVideo').src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+        }
+
+        function closePopup() {
+            document.getElementById('videoPopup').style.display = 'none';
+            document.getElementById('popupVideo').src = '';
+        }
+
+        function searchVideos() {
+            const query = document.getElementById('searchInput').value;
+            if (query) {
+                window.location.href = `https://www.youtube.com/results?search_query=${query}`;
+            }
+        }
+
+        function switchTheme(theme) {
+            document.body.className = theme;
+        }
+
+        // Call the functions on page load
+        window.onload = function() {
+            fetchLatestVideos();
+            fetchPopularVideos();
+            fetchPlaylists();
+            fetchSubscriberCount();
+        };
+    </script>
+</body>
+</html>
