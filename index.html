@@ -292,8 +292,8 @@
         const apiKey = 'AIzaSyBXPwWr9QjRk-AAwgYun2XChItrNKzjeEk';
         const channelId = 'UCmWqggEeCFHGdakwdcOSsyA'; 
 
-        const apiUrlVideos = `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&channelId=${channelId}&part=snippet&type=video&maxResults=5`;
-        const apiUrlPlaylists = `https://www.googleapis.com/youtube/v3/playlists?key=${apiKey}&channelId=${channelId}&part=snippet&maxResults=5`;
+        const apiUrlVideos = `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&channelId=${channelId}&part=snippet&type=video&maxResults=100`;
+        const apiUrlPlaylists = `https://www.googleapis.com/youtube/v3/playlists?key=${apiKey}&channelId=${channelId}&part=snippet&maxResults=100`;
         const apiUrlSubscribers = `https://www.googleapis.com/youtube/v3/channels?key=${apiKey}&id=${channelId}&part=statistics`;
 
         // Fetch the latest videos
